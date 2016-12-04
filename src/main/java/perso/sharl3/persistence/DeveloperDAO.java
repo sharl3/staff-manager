@@ -19,7 +19,7 @@ public class DeveloperDAO {
 	    
 	    try {
 	        stmt = dbUtils.getConnection().createStatement();
-	        // First fetch all the developpers
+	        // First fetch all the developpers and get their current project
 	        String query = "Select P.ID ID, P.NAME NAME,P.SURNAME SURNAME,PR.LABEL LABEL FROM PERSON P, PROJECT PR, PROJECTAFFECTATION PA " +
 							"where P.ID=PA.IDPERSON " +
 							"AND PR.ID=PA.IDPROJECT " +
