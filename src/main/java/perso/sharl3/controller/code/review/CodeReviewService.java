@@ -49,10 +49,11 @@ public class CodeReviewService {
 			developpers.removeAll(idsToRemove);
 			remaimingDevs = developpers.size();
 		}
-		printPairs(pairs, developpers,developerDAO.getDevelopersData());
+		printPairs(pairs, developpers);
 	}
 	
-	private void printPairs(Map<String, String> pairs, List<String> developpers, Map<String, Developer> developersData) {
+	private void printPairs(Map<String, String> pairs, List<String> developpers) throws SQLException {
+		Map<String, Developer> developersData = developerDAO.getDevelopersData();
 		System.out.println("Number of pairs  : " + pairs.size());
 		if(developpers.size() > 0){
 			System.out.println("First dev is left with no pair : ");
