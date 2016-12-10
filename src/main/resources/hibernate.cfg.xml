@@ -2,23 +2,16 @@
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
- 
+
 <hibernate-configuration>
-    <session-factory>
- 
-        <!-- Connection settings -->
-        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost/postgres</property>
-        <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">P0stgres</property>
-  		<property name="hibernate.default_schema">comptes</property>
-        
-        <!-- SQL dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
- 
-        <!-- Print executed SQL to stdout -->
-        <property name="show_sql">true</property>
- 
-        
-    </session-factory>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:XE</property>
+		<property name="hibernate.connection.username">STAFFING</property>
+		<property name="hibernate.connection.password">STAFFING</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="hibernate.default_schema">STAFFING</property>
+		<property name="show_sql">true</property>
+		<mapping resource="perso/sharl3/user/DBUser.hbm.xml"></mapping>
+	</session-factory>
 </hibernate-configuration>

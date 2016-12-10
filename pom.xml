@@ -8,7 +8,7 @@
 	<name>staff-manager</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<oracle.version>11.2.0.2</oracle.version>
+		<oracle.version>11.2.0.3</oracle.version>
 		<hibernate.version>5.0.7.Final</hibernate.version>
 	</properties>
 	<dependencies>
@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.3</version>
+			<version>${oracle.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -31,15 +31,9 @@
 
 		<!-- The tutorials use the PostgreSQL 9.3.5 database -->
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.3-1102-jdbc41</version>
-		</dependency>
-
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
