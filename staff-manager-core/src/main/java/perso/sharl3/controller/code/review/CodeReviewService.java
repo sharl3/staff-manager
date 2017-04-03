@@ -58,9 +58,18 @@ public class CodeReviewService {
 			System.out.println("First dev is left with no pair : ");
 			System.out.println(developersData.get(developpers.get(0)).toString(";"));
 		}
+		List<String> errors = new ArrayList<String>();
+		
 		for(String idLeftDev : pairs.keySet()){
-//			System.out.println("idLeftDev : " + idLeftDev + " - idRightDev : " + pairs.get(idLeftDev));
-			System.out.println(developersData.get(idLeftDev).toString(";") + ";" + developersData.get(pairs.get(idLeftDev)).toString(";"));
+			try {
+				System.out.println(developersData.get(idLeftDev).toString(";") + ";" + developersData.get(pairs.get(idLeftDev)).toString(";"));
+			} catch (Exception e) {
+				errors.add(e.getMessage() + " occured on pair : idLeftDev : " + idLeftDev + " - idRightDev : " + pairs.get(idLeftDev));
+			}
+		}
+		
+		for(String error : errors){
+			System.out.println(error);
 		}
 	} 
 
