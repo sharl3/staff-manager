@@ -11,31 +11,32 @@ import perso.sharl3.entity.Developer;
 import perso.sharl3.persistence.DeveloperDAO;
 
 public class CodeReviewService {
-	
+
 	private DeveloperDAO developerDAO;
-	
+
 	public CodeReviewService() {
 		developerDAO = new DeveloperDAO();
 	}
 
-	public void generatePairs()  throws SQLException {
-    	// TODO : prevent devs from the same project to be pairs
-    	// TODO : prevent devs that have already been paired to be pairs
+	public void generatePairs() throws SQLException {
+		// TODO : prevent devs from the same project to be pairs
+		// TODO : prevent devs that have already been paired to be pairs
 		// TODO : generate db script / write to db
 		Map<String, String> pairs = new HashMap<String, String>();
-	    Random randomGenerator = new Random();
-	    List<String> developpers = developerDAO.getDevelopers();
+		Random randomGenerator = new Random();
+		List<String> developpers = developerDAO.getDevelopers();
 		// Let's create some pairs
-	    int remaimingDevs = developpers.size();
-	    System.out.println("Number of developpers : " + remaimingDevs);
-		while(remaimingDevs > 1) {
+		int remaimingDevs = developpers.size();
+		System.out.println("Number of developpers : " + remaimingDevs);
+		while (remaimingDevs > 1) {
 			int idLeftDev = 1;
 			int idRightDev = 0;
-			if(remaimingDevs > 2){
+			if (remaimingDevs > 2) {
 				idLeftDev = randomGenerator.nextInt(remaimingDevs);
 				idRightDev = randomGenerator.nextInt(remaimingDevs);
-//				System.out.println("idLeftDev " + idLeftDev + " - idRightDev" + idRightDev);
-				while(idLeftDev == idRightDev) {
+				// System.out.println("idLeftDev " + idLeftDev + " - idRightDev"
+				// + idRightDev);
+				while (idLeftDev == idRightDev) {
 					System.out.println("idLeftDev " + idLeftDev + " - idRightDev " + idRightDev);
 					idRightDev = randomGenerator.nextInt(remaimingDevs);
 				}
@@ -49,28 +50,27 @@ public class CodeReviewService {
 			developpers.removeAll(idsToRemove);
 			remaimingDevs = developpers.size();
 		}
-		printPairs(pairs, developpers,developerDAO.getDevelopersData());
+		printPairs(pairs, developpers, developerDAO.getDevelopersData());
 	}
-	
-	private void printPairs(Map<String, String> pairs, List<String> developpers, Map<String, Developer> developersData) {
+
+	private void printPairs(Map<String, String> pairs, List<String> developpers,
+			Map<String, Developer> developersData) {
 		System.out.println("Number of pairs  : " + pairs.size());
-		if(developpers.size() > 0){
+		if (developpers.size() > 0) {
 			System.out.println("First dev is left with no pair : ");
 			System.out.println(developersData.get(developpers.get(0)).toString(";"));
 		}
 		List<String> errors = new ArrayList<String>();
-		
-		for(String idLeftDev : pairs.keySet()){
+		for (String idLeftDev : pairs.keySet()) {
 			try {
-				System.out.println(developersData.get(idLeftDev).toString(";") + ";" + developersData.get(pairs.get(idLeftDev)).toString(";"));
+				System.out.println(developersData.get(idLeftDev).toString(";") + ";"
+						+ developersData.get(pairs.get(idLeftDev)).toString(";"));
 			} catch (Exception e) {
-				errors.add(e.getMessage() + " occured on pair : idLeftDev : " + idLeftDev + " - idRightDev : " + pairs.get(idLeftDev));
+				errors.add(e.toString() + " occured on pair : idLeftDev : " + idLeftDev + " - idRightDev : "
+						+ pairs.get(idLeftDev));
 			}
 		}
-		
-		for(String error : errors){
-			System.out.println(error);
-		}
-	} 
+		errors.stream().forEach(System.out::println);
+	}
 
 }
