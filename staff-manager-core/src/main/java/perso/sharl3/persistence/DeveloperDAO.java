@@ -20,11 +20,15 @@ public class DeveloperDAO {
 	    try {
 	        stmt = dbUtils.getConnection().createStatement();
 	        // First fetch all the developpers and get their current project
-	        String query = "Select P.ID ID, P.NAME NAME,P.SURNAME SURNAME,PR.LABEL LABEL FROM PERSON P, PROJECT PR, PROJECTAFFECTATION PA " +
-							"where P.ID=PA.IDPERSON " +
-							"AND PR.ID=PA.IDPROJECT " +
-							"AND P.IDROLE='DEV' " +
-							"AND P.DATESORTIE IS NULL";
+	        String query = "SELECT P.ID ID, P.NAME NAME,P.SURNAME SURNAME,PR.LABEL LABEL FROM PERSON P "
+	        		+"INNER JOIN PROJECTAFFECTATION PA on PA.IDPERSON = P.ID "
+	        		+"LEFT JOIN PROJECT PR on PR.ID = PA.IDPROJECT "
+	        		+"WHERE PA.DATESTART = "
+	        		+"(SELECT MAX(DATESTART) FROM PROJECTAFFECTATION PA2 "
+	        		+"WHERE PA2.IDPERSON = PA.IDPERSON) "
+	        		+"AND P.IDROLE='DEV' "
+	        		+"AND P.DATESORTIE IS NULL " 
+	        		+"AND P.DATEENTREE < SYSDATE";
 	        ResultSet rs = stmt.executeQuery(query);
 	        while (rs.next()) {
 	            developpers.put(rs.getString("ID"), new Developer(rs.getString("ID"), rs.getString("NAME"), rs.getString("SURNAME"), rs.getString("LABEL")));
