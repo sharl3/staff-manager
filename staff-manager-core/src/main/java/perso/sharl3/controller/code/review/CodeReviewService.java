@@ -18,9 +18,10 @@ public class CodeReviewService {
 		developerDAO = new DeveloperDAO();
 	}
 
-	public void generatePairs() throws SQLException {
-		// TODO : prevent devs from the same project to be pairs
-		// TODO : prevent devs that have already been paired to be pairs
+	public void generatePairs()  throws SQLException {
+    	// TODO : prevent devs from the same project to be pairs
+    	// TODO : prevent devs that have already been paired to be pairs
+		// TODO : prevent people working on the same site to be pairs
 		// TODO : generate db script / write to db
 		Map<String, String> pairs = new HashMap<String, String>();
 		Random randomGenerator = new Random();
